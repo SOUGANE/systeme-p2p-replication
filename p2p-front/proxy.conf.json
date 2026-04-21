@@ -1,0 +1,23 @@
+{
+  "/node-a": {
+    "target": "http://localhost:5000",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/node-a": "" },
+    "logLevel": "info"
+  },
+  "/node-b": {
+    "target": "http://localhost:5001",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/node-b": "" },
+    "logLevel": "info"
+  },
+  "/node-c": {
+    "target": "http://localhost:5002",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/node-c": "" },
+    "logLevel": "info"
+  }
+}

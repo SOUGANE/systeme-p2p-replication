@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ╔══════════════════════════════════════════════════════════╗
+   ║           CONFIGURATION DU THÈME — À MODIFIER ICI        ║
+   ║                                                          ║
+   ║  Choisissez votre thème en décommentant UNE seule ligne  ║
+   ║  dans la section "CHOIX DU THÈME" ci-dessous             ║
+   ╚══════════════════════════════════════════════════════════╝ */
+
+
+/* ════════════════════════════════════════════════
+   CHOIX DU THÈME  ← décommentez celui que vous voulez
+   ════════════════════════════════════════════════ */
+
+/* @import 'themes/theme-dark';    */   /* ← SOMBRE (actuel)       */
+/* @import 'themes/theme-white';   */   /* ← BLANC pur             */
+/* @import 'themes/theme-gray';    */   /* ← GRIS clair            */
+/* @import 'themes/theme-4tech';   */   /* ← 4TECH bleu/blanc      */
+
+
+/* ════════════════════════════════════════════════
+   THÈME ACTIF — Modifiez directement ces valeurs
+   ════════════════════════════════════════════════
+
+   GUIDE RAPIDE :
+   ┌─────────────────────────────────────────────────────────┐
+   │  THÈME SOMBRE (actuel)                                  │
+   │   --bg-base     : #080b12   ← fond de page              │
+   │   --bg-surface  : #0e1219   ← fond des cartes           │
+   │   --bg-elevated : #141a24   ← fond surélevé             │
+   │   --text-primary: #dde4f0   ← texte principal           │
+   │                                                         │
+   │  THÈME BLANC                                            │
+   │   --bg-base     : #ffffff                               │
+   │   --bg-surface  : #f8f9fb                               │
+   │   --bg-elevated : #f0f2f5                               │
+   │   --text-primary: #111827                               │
+   │                                                         │
+   │  THÈME GRIS                                             │
+   │   --bg-base     : #f1f3f5                               │
+   │   --bg-surface  : #ffffff                               │
+   │   --bg-elevated : #e8eaed                               │
+   │   --text-primary: #1a1a2e                               │
+   └─────────────────────────────────────────────────────────┘ */
+ 
+
+:root {
+
+  /* ── POLICES (ne pas changer sauf besoin) ── */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* ════════════════════════════════════
+     COULEURS DE FOND
+     ════════════════════════════════════ */
+
+  /* SOMBRE — décommentez ce bloc pour thème sombre */
+  --bg-base:     #0a0f1a;    /* fond général de la page         */
+  --bg-surface:  #1144a1;    /* fond des cartes et sidebar      */
+  --bg-elevated: #04070a;    /* fond des éléments surélevés     */
+  --bg-hover:    #161921;    /* fond au survol                  */
+
+  /* BLANC — remplacez les 4 lignes ci-dessus par ceci :
+  --bg-base:     #f5f7fa;
+  --bg-surface:  #ffffff;
+  --bg-elevated: #eef0f4;
+  --bg-hover:    #e5e8ef;
+  */
+
+  /* GRIS CLAIR — remplacez les 4 lignes ci-dessus par ceci :
+  --bg-base:     #e8eaed;
+  --bg-surface:  #f4f5f7;
+  --bg-elevated: #dde0e6;
+  --bg-hover:    #d0d3da;
+  
+
+  /* ════════════════════════════════════
+     BORDURES
+     ════════════════════════════════════ */
+
+  /* Pour thème SOMBRE : */
+  --border:        rgba(255,255,255,.07);
+  --border-bright: rgba(255,255,255,.13);
+
+  /* Pour thème BLANC ou GRIS, remplacez par :
+  --border:        rgba(0,0,0,.08);
+  --border-bright: rgba(0,0,0,.15);
+  */
+
+  /* ════════════════════════════════════
+     TEXTE
+     ════════════════════════════════════ */
+
+  /* Pour thème SOMBRE : */
+  --text-primary:   #397bd6;    /* texte principal (titres)      */
+  --text-secondary: #f0f3f8;    /* texte secondaire              */
+  --text-muted:     #28d418;    /* texte discret                 */
+
+  /* Pour thème BLANC ou GRIS, remplacez par :
+  --text-primary:   #111827;
+  --text-secondary: #374151;
+  --text-muted:     #6b7280;
+  */
+
+  /* ════════════════════════════════════
+     COULEUR ACCENT (boutons, liens, actif)
+     Changez cette seule couleur pour changer toute l'interface !
+     ════════════════════════════════════ */
+
+  --accent: #6c8fff;    /* Bleu (actuel)                         */
+  /* --accent: #2d2daa; */   /* ← Bleu 4TECH (votre logo)        */
+  /* --accent: #6cc24a; */   /* ← Vert 4TECH                     */
+  /* --accent: #e8524a; */   /* ← Rouge 4TECH                    */
+  /* --accent: #f5a623; */   /* ← Orange 4TECH                   */
+  /* --accent: #10b981; */   /* ← Vert émeraude                  */
+  /* --accent: #8b5cf6; */   /* ← Violet                         */
+  /* --accent: #f59e0b; */   /* ← Ambre/Or                       */
+
+  /* ════════════════════════════════════
+     COULEURS SÉMANTIQUES (status)
+     ════════════════════════════════════ */
+  --green: #34d399;    /* succès, en ligne    */
+  --amber: #fbbf24;    /* avertissement       */
+  --red:   #f87171;    /* erreur, hors ligne  */
+}
+
+
+/* ══════════════════════════════════════════════════
+   RESET & BASE
+   ══════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ══════════════════════════════════════════════════
+   SCROLLBAR
+   ══════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ══════════════════════════════════════════════════
+   ANIMATION D'ENTRÉE DES PAGES
+   ══════════════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+app-dashboard,
+app-upload,
+app-download,
+app-replication,
+app-nodes {
+  display: block;
+  animation: fadeIn .2s ease both;
+}

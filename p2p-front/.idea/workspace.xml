@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="12515684-c5e8-4fd3-8514-3f6aadd5f9fb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/unchk/p2p_node/P2pNodeApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/unchk/p2p_node/config/NodeConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/unchk/p2p_node/config/RestTemplateConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/unchk/p2p_node/controller/FileController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/unchk/p2p_node/service/FileService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/resources/application-nodeA.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/resources/application-nodeB.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/resources/application-nodeC.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/unchk/p2p_node/P2pNodeApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../storage_node_5000/replication.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../storage_node_5000/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../storage_node_5000/testC.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../storage_node_5001/replication.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../storage_node_5001/testB.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../storage_node_5001/testC.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../storage_node_5002/testC.txt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="3CWoisreujKtNivp7pRd0dQ2rcX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="12515684-c5e8-4fd3-8514-3f6aadd5f9fb" name="Changes" comment="" />
+      <created>1776510817356</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1776510817356</updated>
+    </task>
+    <servers />
+  </component>
+</project>
