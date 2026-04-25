@@ -1,6 +1,7 @@
 package com.unchk.p2p_node.service;
 
 import com.unchk.p2p_node.config.NodeConfig;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.slf4j.MDC;
+
 @Service
 public class FileService {
 
@@ -25,8 +31,23 @@ public class FileService {
     @Autowired
     private RestTemplate restTemplate;
 
+
+    /**
+     * Logger principal du service.
+     *
+     * Permet de tracer les opérations du système distribué :
+     * - sauvegardes
+     * - réplications
+     * - recherches distribuées
+     * - erreurs réseau
+     */
+    private static final Logger log = LoggerFactory.getLogger(FileService.class);
+
+
     public void saveFile(String filename, byte[] data) {
         validateFilename(filename);
+
+        log.info("[{}] Réception d'un nouveau fichier '{}' depuis le client",config.getId(), filename);
         //Étape 1 : dédiée pour la sauvegarde locale
         saveFileLocally(filename, data);
 
@@ -39,13 +60,16 @@ public class FileService {
     public byte[] getFile(String filename) {
         validateFilename(filename);
              //Pour étatpe 1
-        //return getLocalFile(filename);
+       // return getLocalFile(filename);
 
                 // Pour étatpe 4
         // 1. On vérifie d'abord si le fichier existe localement
         if (existsLocally(filename)) {
+            log.info("[{}] Fichier '{}' trouvé localement",config.getId(), filename);
             return getLocalFile(filename);
         }
+
+        log.warn("[{}] Fichier '{}' absent localement, lancement de la recherche distribuée",config.getId(), filename);
 
         // 2. Si le fichier est absent localement, on essaie de le chercher chez les peers
         byte[] peerData = searchInPeers(filename);
@@ -56,6 +80,7 @@ public class FileService {
         }
 
         // 4. Si ni le nœud local ni les peers n'ont le fichier, on renvoie une erreur
+        log.error("[{}] Fichier '{}' introuvable localement et chez les peers",config.getId(), filename);
         throw new RuntimeException("Fichier introuvable localement et chez les peers : " + filename);
 
     }
@@ -78,8 +103,10 @@ public class FileService {
             // Écrit le contenu du fichier dans le chemin indiqué
             // Si le fichier existe déjà, il sera écrasé
             Files.write(filePath, data);
+            log.info("[{}] Fichier '{}' sauvegardé localement dans '{}'",config.getId(), filename, filePath);
 
         } catch (IOException e) {
+            log.error("[{}] Erreur lors de la sauvegarde locale du fichier '{}' : {}",config.getId(), filename, e.getMessage());
             throw new RuntimeException("Erreur lors de la sauvegarde du fichier : " + filename, e);
         }
     }
@@ -90,9 +117,11 @@ public class FileService {
      * Cette méthode servira lorsqu'un autre nœud envoie un fichier à copier.
      * Ici, on fait seulement la sauvegarde locale.
      */
-    public void saveReplicatedFile(String filename, byte[] data) {
+    public void saveReplicatedFile(String filename, byte[] data, String sourceNode) {
         validateFilename(filename);
         saveFileLocally(filename, data);
+
+        log.info("[{}] Réception d'un fichier répliqué '{}' depuis le peer '{}'",config.getId(), filename, sourceNode);
     }
 
     /**
@@ -123,18 +152,23 @@ public class FileService {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
+                // On envoie l'identité du node qui envoie le fichier
+                headers.add("X-Source-Node", config.getId());
+
                 // Corps de la requête HTTP = contenu du fichier + headers
                 HttpEntity<byte[]> requestEntity = new HttpEntity<>(data, headers);
 
                 // Envoi HTTP POST au peer
                 restTemplate.postForEntity(url, requestEntity, String.class);
 
-                System.out.println("Réplication réussie vers : " + peer);
+                //System.out.println("Réplication réussie vers : " + peer);
+                log.info("[{}] Réplication réussie vers le peer {}",config.getId(), peer);
 
             } catch (Exception e) {
                 // Si un peer est arrêté ou inaccessible,
                 // on affiche l'erreur sans faire échouer tout le traitement
-                System.out.println("Échec de la réplication vers " + peer + " : " + e.getMessage());
+               // System.out.println("Échec de la réplication vers " + peer + " : " + e.getMessage());
+                log.error("[{}] Échec de la réplication vers le peer {} : {}",config.getId(), peer, e.getMessage());
             }
         }
     }
@@ -198,18 +232,20 @@ public class FileService {
                 // Si le peer répond correctement avec un body non vide,
                 // on retourne immédiatement le contenu du fichier
                 if (response.getBody() != null) {
-                    System.out.println("Fichier trouvé chez le peer : " + peer);
-
+                    //System.out.println("Fichier trouvé chez le peer : " + peer);
+                    log.info(" [{}] Fichier '{}' trouvé chez le peer {}",config.getId(), filename, peer);
                     return response.getBody();
                 }
 
             } catch (HttpClientErrorException.NotFound e) {
                 // Le peer a répondu 404 : il ne possède pas ce fichier localement
-                System.out.println("Fichier absent chez le peer : " + peer);
+               // System.out.println("Fichier absent chez le peer : " + peer);
+                log.warn("[{}] Fichier '{}' absent chez le peer {}",config.getId(), filename, peer);
 
             } catch (Exception e) {
                 // Le peer est peut-être indisponible ou inaccessible
-                System.out.println("Impossible d'interroger le peer " + peer + " : " + e.getMessage());
+                //System.out.println("Impossible d'interroger le peer " + peer + " : " + e.getMessage());
+                log.error("[{}] Impossible d'interroger le peer {} : {}", config.getId(), peer, e.getMessage());
             }
         }
 

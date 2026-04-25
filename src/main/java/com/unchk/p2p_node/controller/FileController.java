@@ -52,10 +52,11 @@ public class FileController {
     @PostMapping("/internal/replicate/{filename}")
     public ResponseEntity<String> replicate(
             @PathVariable String filename,
-            @RequestBody byte[] data) {
+            @RequestBody byte[] data,
+            @RequestHeader(value = "X-Source-Node", required = false) String sourceNode) {
 
-        fileService.saveReplicatedFile(filename, data);
-        return ResponseEntity.ok("Fichier répliqué localement.");
+        fileService.saveReplicatedFile(filename, data, sourceNode);
+        return ResponseEntity.ok("OK");
     }
 
 

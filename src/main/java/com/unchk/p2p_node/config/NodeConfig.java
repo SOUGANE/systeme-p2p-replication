@@ -20,6 +20,8 @@ public class NodeConfig {
      */
     private String storage;
 
+    private String id;
+
     /**
      * Liste des autres nœuds
      */

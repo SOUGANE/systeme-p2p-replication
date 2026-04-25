@@ -3,6 +3,16 @@ server:
 
 node:
   storage: storage_node_5000
+  id: http://localhost:5000
   peers:
     - http://localhost:5001
     - http://localhost:5002
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss} %clr([%level]) %clr(%msg){faint}%n"
+
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
